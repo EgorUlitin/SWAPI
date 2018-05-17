@@ -1,4 +1,4 @@
-import { GET_FILMS, GET_PEOPLE, GET_PLANETS, GET_SPECIES, GET_STARSHIP, GET_VEHICLES } from './types';
+import { GET_PEOPLE } from './types';
 import axios from 'axios';
 
 export const getPeople = () => dispatch => {
