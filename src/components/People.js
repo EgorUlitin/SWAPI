@@ -1,36 +1,44 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../App.css';
-import {ListGroup, ListGroupItem} from 'react-bootstrap';
+import { ListGroup, ListGroupItem } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { getPeople } from '../actions/peopleActions';
+import store from '../store/store.js';
+
 
 class People extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            peopls: []
-        }
+    componentWillMount() {
+        this.props.getPeople();
     }
-
-    componentDidMount() {
-        axios.get('https://swapi.co/api/people/').then(res => {
-            this.setState({peopls: res.data.results});
-            console.log(this.state.peopls);
-        });
-
-    }
-
 
     render() {
+        const peopleItems = this.props.people.map((people, index) => 
+            <Link to={`/people/${index}`}>
+                <ListGroupItem
+                    href='#'>{people.name}
+                </ListGroupItem>
+            </Link>);
+
         return (
             <div className="">
                 <ListGroup className='pepolelist'>
-                    {this.state.peopls.map((people, index) => <Link to={`/people/${index}`}><ListGroupItem
-                        href='#'>{people.name}</ListGroupItem></Link>)}
+                    {peopleItems}
                 </ListGroup>
             </div>
         )
     }
 }
 
-export default People;
+People.propTypes = {
+    getPeople: PropTypes.func.isRequired,
+    people: PropTypes.array.isRequired
+}
+
+const mapStateToProps = state => ({
+    people: state.people.items
+});
+
+export default connect(mapStateToProps, { getPeople })(People);

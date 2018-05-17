@@ -1,37 +1,43 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
-import axios from 'axios';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import '../App.css';
-import {ListGroup, ListGroupItem, Table} from 'react-bootstrap';
+import { ListGroup, ListGroupItem, Table } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { getPlanets } from '../actions/planetsActions';
+import store from '../store/store.js';
 
 class Planet extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            planets: []
-        }
+    componentWillMount() {
+        this.props.getPlanets();
     }
-
-    componentDidMount() {
-        axios.get('https://swapi.co/api/planets/').then(res => {
-            this.setState({planets: res.data.results});
-            console.log(this.state.planets);
-        });
-
-    }
-
 
     render() {
+        
+        const planetItems = this.props.planets.map((planet, index) => 
+            <Link to={`/planets/${index}`}>
+                <ListGroupItem
+                href='#'>{planet.name}
+                </ListGroupItem>
+            </Link>)
+
         return (
             <div className="">
                 <ListGroup className='planetlist'>
-                    {this.state.planets.map((planet, index) => <Link to={`/planets/${index}`}><ListGroupItem
-                        href='#'>{planet.name}</ListGroupItem></Link>)
-                    }
+                    {planetItems}
                 </ListGroup>
             </div>
         )
     }
 }
 
-export default Planet;
+Planet.propTypes = {
+    getPlanets: PropTypes.func.isRequired,
+    planets: PropTypes.array.isRequired
+}
+
+const mapStateToProps = state => ({
+    planets: state.planets.items
+});
+
+export default connect(mapStateToProps, { getPlanets })(Planet);

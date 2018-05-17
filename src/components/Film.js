@@ -1,36 +1,43 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
-import axios from 'axios';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import '../App.css';
-import {ListGroup, ListGroupItem} from 'react-bootstrap';
+import { ListGroup, ListGroupItem } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { getFilms } from '../actions/filmActions';
+import store from '../store/store.js';
 
 class Film extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            films: []
-        }
+    componentWillMount() {
+        this.props.getFilms();
     }
-
-    componentDidMount() {
-        axios.get('https://swapi.co/api/films/').then(res => {
-            this.setState({films: res.data.results});
-            console.log(this.state.films);
-        });
-
-    }
-
 
     render() {
+        
+        const filmsItems = this.props.films.map((film, index) => (
+            <Link to={`/films/${index}`}>
+                <ListGroupItem
+                href='#'>{film.title}
+                </ListGroupItem>
+            </Link>));
+
         return (
             <div className="">
                 <ListGroup className='filmlist'>
-                    {this.state.films.map((film, index) => <Link to={`/films/${index}`}><ListGroupItem
-                        href='#'>{film.title}</ListGroupItem></Link>)}
+                    {filmsItems}
                 </ListGroup>
             </div>
         )
     }
 }
 
-export default Film;
+Film.propTypes = {
+    getFilms: PropTypes.func.isRequired,
+    films: PropTypes.array.isRequired
+}
+
+const mapStateToProps = state => ({
+    films: state.films.items
+});
+
+export default connect(mapStateToProps, { getFilms })(Film);

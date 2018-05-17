@@ -1,36 +1,38 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
-import axios from 'axios';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import '../App.css';
-import {ListGroup, ListGroupItem} from 'react-bootstrap';
+import { ListGroup, ListGroupItem } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { getStarship } from '../actions/starshipsActions';
+import store from '../store/store.js';
 
 class Starship extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            starships: []
-        }
+    componentWillMount() {
+        this.props.getStarship();
     }
-
-    componentDidMount() {
-        axios.get('https://swapi.co/api/starships/').then(res => {
-            this.setState({starships: res.data.results});
-            console.log(this.state.starships);
-        });
-
-    }
-
 
     render() {
+        const starship = this.props.starship.map((starship, index) => <Link to={`/starships/${index}`}><ListGroupItem
+        href='#'>{starship.name}</ListGroupItem></Link>)
+
         return (
             <div className="">
                 <ListGroup className='planetlist'>
-                    {this.state.starships.map((starship, index) => <Link to={`/starships/${index}`}><ListGroupItem
-                        href='#'>{starship.name}</ListGroupItem></Link>)}
+                    {starship}
                 </ListGroup>
             </div>
         )
     }
 }
 
-export default Starship;
+Starship.PropTypes = {
+    getStarship: PropTypes.func.isRequired,
+    starship: PropTypes.array.isRequired
+}
+
+const mapStateToProps = state => ({
+    starship: state.starship.items
+})
+
+export default connect (mapStateToProps, { getStarship })(Starship);

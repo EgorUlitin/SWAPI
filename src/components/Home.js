@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Switch, Route} from 'react-router-dom';
 import Header from './Header';
-import App from '../App';
+import App from '../containers/App';
 import About from './About';
 import Main from './Main';
 import Film from './Film';
