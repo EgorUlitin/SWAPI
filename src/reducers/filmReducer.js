@@ -1,4 +1,4 @@
-import { GET_FILMS, GET_PEOPLE, GET_PLANETS, GET_SPECIES, GET_STARSHIP, GET_VEHICLES } from '../actions/types';
+import { GET_FILMS } from '../actions/types';
 
 const initialState = {
     items: []
