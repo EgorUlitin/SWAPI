@@ -5,7 +5,6 @@ import '../App.css';
 import { ListGroup, ListGroupItem, Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { getPlanets } from '../actions/planetsActions';
-import store from '../store/store.js';
 
 class Planet extends Component {
     componentWillMount() {

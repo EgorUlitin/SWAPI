@@ -7,7 +7,7 @@ import Film from './Film';
 import People from './People';
 import About from './About';
 import Planet from './Planet';
-import App from '../containers/App';
+import Chat from './ChatContainer';
 import Starship from "./Starship";
 import Species from "./Species";
 import Vehicles from "./Vehicles";
@@ -21,7 +21,7 @@ class Main extends Component {
                         <Route exact path='/' component={Home}/>
                         <Route path='/films' component={Film}/>
                         <Route path='/people' component={People}/>
-                        <Route path='/about' component={About}/>
+                        <Route path='/chat' component={Chat}/>
                         <Route path='/planets' component={Planet}/>
                         <Route path='/starships' component={Starship}/>
                         <Route path='/species' component={Species}/>

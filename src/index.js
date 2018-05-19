@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types'
 import './index.css';
-import App from './containers/App';
+import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -13,6 +13,6 @@ ReactDOM.render(
         <BrowserRouter>
             <App/>
         </BrowserRouter>
-    </Provider>, 
+    </Provider>,
     document.getElementById('root'));
-    registerServiceWorker();
+registerServiceWorker();

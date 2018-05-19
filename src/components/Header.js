@@ -13,7 +13,7 @@ export default class Header extends Component {
                         <Link to="/"><Button bsSize="large">Home</Button></Link>
                     </li>
                     <li className=''>
-                        <Link to="/about"><Button bsSize="large">About</Button></Link>
+                        <Link to="/chat"><Button bsSize="large">Chat</Button></Link>
                     </li>
                 </ul>
             </div>

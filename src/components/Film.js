@@ -5,7 +5,6 @@ import '../App.css';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { getFilms } from '../actions/filmActions';
-import store from '../store/store.js';
 
 class Film extends Component {
     componentWillMount() {

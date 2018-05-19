@@ -6,6 +6,8 @@ import planetReducer from './planetReducer';
 import speciesReducer from './speciesReducer';
 import starshipReducer from './starshipReducer';
 import vehiclesReducer from './vehiclesReducer';
+import messages from './messagesReducer';
+import users from './usersReducer';
 
 export default combineReducers({
     routing: routerReducer,
@@ -14,5 +16,7 @@ export default combineReducers({
     planets: planetReducer,
     species: speciesReducer,
     starship: starshipReducer,
-    vehicles: vehiclesReducer
+    vehicles: vehiclesReducer,
+    messages,
+    users
  });

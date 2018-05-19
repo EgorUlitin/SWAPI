@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import {Switch, Route} from 'react-router-dom';
-import Header from './Header';
-import App from '../containers/App';
+import '../App.css';
 
 class About extends Component {
     render() {
         return (
-            <div>
+            <div className="">
                 <h1>About</h1>
             </div>
         )
